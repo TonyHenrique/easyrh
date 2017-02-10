@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<script>
+    //window.location = "/Form";
+</script>
+
+<div ng-app="talentoApp" ng-controller="formController">
+    <h1>Bem vindo</h1>
+
+    <h2><a href="/Form/New">Cadastro de Talento</a></h2>
+    <br />
+
+    <h2><a href="/Form/List">Listagem (Criar, Editar, Salvar, Excluir) </a></h2>
+    <br />
+
+    @*<input type="button" onclick="c();" value="teste">*@
+    <script>
+        ////$.when());//window.novo())); window.location = '/Form/Edit/' + id;
+
+        //function c() {
+        //    window.carrega(37).then(
+        //        function (data) {
+        //            alert('terminai ' + data.nome +  JSON.stringify(data)  )
+        //        }
+        //        );
+        //}
+
+    </script>
+</div>
+
+<script src="~/js/talento.js"></script>

@@ -1,0 +1,21 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1>Confirma apagar?</h1>
+<div ng-app="talentoApp" ng-controller="formController">
+
+    <input type="button" class="btn" value="SIM" onclick="apaga(GetURLParameter(), '/Form/List');" />
+    <input type="button" class="btn" value="NÃO" onclick="window.location='/Form/List'" />
+
+</div>
+
+<script src="~/js/talento.js"></script>
+
+<script>
+    function apagar() {
+        alert(GetURLParameter());
+    }
+</script>

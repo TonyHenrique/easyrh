@@ -1,0 +1,39 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div id="div1" ng-app="talentoApp">
+    <h1>Easycomtec</h1>
+    <h2>Listagem do Cadastro de Talentos</h2>
+
+    <div ng-controller="formController">
+
+        <h1>Listagem</h1>
+
+        <ul ng-repeat="talento in talentos">
+            <li>
+                <a href="/Form/Edit/{{talento.id_Talento}}" class="btn btn-default" onclick="">Editar</a>
+                <a href="/Form/AskToDelete/{{talento.id_Talento}}" class="btn btn-danger">Excluir</a>
+                <b>{{talento.nome}}</b>
+            </li>
+
+        </ul>
+
+    </div>
+</div>
+
+
+<script src="~/js/talento.js"></script>
+<script>
+
+    
+    angular.element(div1).ready(function () {
+        // Your function that runs after all DOM is loaded
+
+        window.carregatodos();
+    });
+
+
+</script>

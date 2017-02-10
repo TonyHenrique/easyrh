@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="rheasyModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="rheasyModelStoreContainer">
+    <EntitySet Name="Talento" EntityType="rheasyModel.Store.Talento" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Conhecimento" EntityType="rheasyModel.Store.Conhecimento" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="TalentoConhecimento" Association="rheasyModel.Store.TalentoConhecimento">
+      <End Role="Talento" EntitySet="Talento" />
+      <End Role="Conhecimento" EntitySet="Conhecimento" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Talento">
+    <Key>
+      <PropertyRef Name="id_Talento" />
+    </Key>
+    <Property Name="id_Talento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar" Nullable="true" MaxLength="250" />
+    <Property Name="CPF" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Banco" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="Agencia" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="TipoDeConta" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="NumeroDaConta" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="OBS_Conhecimentos" Type="nvarchar" Nullable="true" MaxLength="250" />
+    <Property Name="LinkCRUD" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Conhecimento">
+    <Key>
+      <PropertyRef Name="id_Conhecimento" />
+    </Key>
+    <Property Name="id_Conhecimento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Nota" Type="int" Nullable="false" DefaultValue="0" />
+    <Property Name="Talento_id_Talento" Type="int" Nullable="false" />
+    <Property Name="IsImportante" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="TalentoConhecimento">
+    <End Role="Talento" Type="rheasyModel.Store.Talento" Multiplicity="1" />
+    <End Role="Conhecimento" Type="rheasyModel.Store.Conhecimento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Talento">
+        <PropertyRef Name="id_Talento" />
+      </Principal>
+      <Dependent Role="Conhecimento">
+        <PropertyRef Name="Talento_id_Talento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="rheasyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Talento">
+          <Key>
+            <PropertyRef Name="id_Talento" />
+          </Key>
+          <Property Name="id_Talento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CPF" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Banco" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Agencia" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TipoDeConta" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NumeroDaConta" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="OBS_Conhecimentos" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="LinkCRUD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Conhecimento" Relationship="rheasyModel.TalentoConhecimento" FromRole="Talento" ToRole="Conhecimento" />
+        </EntityType>
+        <EntityContainer Name="rheasyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Talento" EntityType="Self.Talento" />
+          <EntitySet Name="Conhecimento" EntityType="rheasyModel.Conhecimento" />
+          <AssociationSet Name="TalentoConhecimento" Association="rheasyModel.TalentoConhecimento">
+            <End Role="Talento" EntitySet="Talento" />
+            <End Role="Conhecimento" EntitySet="Conhecimento" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Conhecimento">
+          <Key>
+            <PropertyRef Name="id_Conhecimento" />
+          </Key>
+          <Property Name="id_Conhecimento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" FixedLength="false" MaxLength="100" />
+          <Property Name="Nota" Type="Int32" Nullable="false" DefaultValue="0" />
+          <NavigationProperty Name="Talento" Relationship="rheasyModel.TalentoConhecimento" FromRole="Conhecimento" ToRole="Talento" />
+          <Property Name="Talento_id_Talento" Type="Int32" Nullable="false" />
+          <Property Name="IsImportante" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="TalentoConhecimento">
+          <End Type="rheasyModel.Talento" Role="Talento" Multiplicity="1" />
+          <End Type="rheasyModel.Conhecimento" Role="Conhecimento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Talento">
+              <PropertyRef Name="id_Talento" />
+            </Principal>
+            <Dependent Role="Conhecimento">
+              <PropertyRef Name="Talento_id_Talento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="rheasyModelStoreContainer" CdmEntityContainer="rheasyEntities">
+    <EntitySetMapping Name="Talento">
+      <EntityTypeMapping TypeName="IsTypeOf(rheasyModel.Talento)">
+        <MappingFragment StoreEntitySet="Talento">
+          <ScalarProperty Name="id_Talento" ColumnName="id_Talento" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="CPF" ColumnName="CPF" />
+          <ScalarProperty Name="Banco" ColumnName="Banco" />
+          <ScalarProperty Name="Agencia" ColumnName="Agencia" />
+          <ScalarProperty Name="TipoDeConta" ColumnName="TipoDeConta" />
+          <ScalarProperty Name="NumeroDaConta" ColumnName="NumeroDaConta" />
+          <ScalarProperty Name="OBS_Conhecimentos" ColumnName="OBS_Conhecimentos" />
+          <ScalarProperty Name="LinkCRUD" ColumnName="LinkCRUD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Conhecimento">
+      <EntityTypeMapping TypeName="IsTypeOf(rheasyModel.Conhecimento)">
+        <MappingFragment StoreEntitySet="Conhecimento">
+          <ScalarProperty Name="id_Conhecimento" ColumnName="id_Conhecimento" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Nota" ColumnName="Nota" />
+          <ScalarProperty Name="Talento_id_Talento" ColumnName="Talento_id_Talento" />
+          <ScalarProperty Name="IsImportante" ColumnName="IsImportante" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
