@@ -17,23 +17,22 @@
                 <a href="/Form/Edit/{{talento.id_Talento}}" class="btn btn-default" onclick="">Editar</a>
                 <a href="/Form/AskToDelete/{{talento.id_Talento}}" class="btn btn-danger">Excluir</a>
                 <b>{{talento.nome}}</b>
+                <b>{{talento.email}}</b>
+                <b>{{talento.telefone}}</b>
             </li>
-
         </ul>
 
+        <a href="/" class="btn">Voltar ao Início</a>
     </div>
 </div>
 
-
 <script src="~/js/talento.js"></script>
 <script>
-
     
     angular.element(div1).ready(function () {
         // Your function that runs after all DOM is loaded
 
         window.carregatodos();
     });
-
-
+    
 </script>

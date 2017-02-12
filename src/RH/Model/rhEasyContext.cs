@@ -9,14 +9,14 @@ namespace RH
 {
     public class rhEasyContext : DbContext
     {
-        public rhEasyContext()
-        {
-        }
+        // juntei este codigo do zero, from scratch, copiando do template gerado no projeto WPF, pois estou sem o VS 2017
+        //public rhEasyContext()
+        //{
+        //}
 
-        public rhEasyContext(DbContextOptions<rhEasyContext> options) : base(options)
-        {
-
-        }
+        //public rhEasyContext(DbContextOptions<rhEasyContext> options) : base(options)
+        //{
+        //}
 
         public virtual DbSet<Talento> Talento { get; set; }
         public virtual DbSet<Conhecimento> Conhecimento { get; set; }

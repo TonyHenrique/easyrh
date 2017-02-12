@@ -22,6 +22,8 @@ namespace WinRH
     
         public int id_Talento { get; set; }
         public string Nome { get; set; }
+        public string email { get; set; }
+        public string Telefone { get; set; }
         public string CPF { get; set; }
         public string Banco { get; set; }
         public string Agencia { get; set; }

@@ -3,19 +3,20 @@
 *@
 @{
 }
-
 <h1>Confirma apagar?</h1>
-<div ng-app="talentoApp" ng-controller="formController">
-
+<div id="div1" ng-app="talentoApp" ng-controller="formController">
+    <h2>{{talento.nome}}</h2>
+    <br />
     <input type="button" class="btn" value="SIM" onclick="apaga(GetURLParameter(), '/Form/List');" />
     <input type="button" class="btn" value="NÃO" onclick="window.location='/Form/List'" />
-
 </div>
 
 <script src="~/js/talento.js"></script>
 
 <script>
-    function apagar() {
-        alert(GetURLParameter());
-    }
+    angular.element(div1).ready(function () {
+        // Your function that runs after all DOM is loaded
+        window.carrega(GetURLParameter());
+    });
+
 </script>
