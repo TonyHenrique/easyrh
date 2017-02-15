@@ -17,27 +17,18 @@ namespace RH.Controllers
         [HttpGet()]
         public Talento New()
         {
-            using (var ctx = new rhEasyContext())
+            var t = new Talento
             {
-                var t = new Talento
-                {
-                    //id_Talento = 1,
-                    Nome = "",
-                    Banco = "Itau",
-                    OBS_Conhecimentos = "",
-                    LinkCRUD = "https://",
-                    TipoDeConta = "CHAIN"
-                    //TipoDeConta = "SAVINGS"
-                };
-                t.Populate();               //t.Conhecimentos.Add(new Conhecimento() { Nome = "teste", Nota = 4 });
+                //id_Talento = sera definido pelo Banco de Dados,
+                Nome = "",
+                Banco = "Itau",
+                OBS_Conhecimentos = "",
+                LinkCRUD = "https://",
+                TipoDeConta = "CHAIN"   //TipoDeConta = "SAVINGS"
+            };
+            t.PopulateConhecimentos();
 
-                ctx.Add(t);
-                ctx.Entry(t).State = Microsoft.EntityFrameworkCore.EntityState.Added;
-
-                ctx.SaveChanges();
-
-                return t;           //return Json(t); // json is default return on ASP.Net core ?
-            }
+            return t;
         }
 
         [Route("GetAll")]
@@ -59,6 +50,9 @@ namespace RH.Controllers
         [HttpGet("{id}")]
         public object Get(long id)
         {
+            if (id == 0)
+                return New();
+
             using (var ctx = new rhEasyContext())
             {
                 var t = ctx.Talento
@@ -74,15 +68,33 @@ namespace RH.Controllers
         [HttpPost]
         public void Update([FromBody] Talento talento)
         {
-            using (var ctx = new rhEasyContext())
+            if (talento.id_Talento == 0)
             {
-                ctx.Attach(talento);
-                ctx.Entry(talento).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                foreach (var c in talento.Conhecimento)
+                #region // Novo talento
+                using (var ctx = new rhEasyContext())
                 {
-                    ctx.Entry(c).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    ctx.Add(talento);
+                    ctx.Entry(talento).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+
+                    ctx.SaveChanges();
                 }
-                ctx.SaveChanges();
+                #endregion
+            }
+            else
+            {
+                #region // Salvar talento existente
+                using (var ctx = new rhEasyContext())
+                {
+                    ctx.Attach(talento);
+                    ctx.Entry(talento).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    foreach (var c in talento.Conhecimento)
+                    {
+                        ctx.Entry(c).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    }
+
+                    ctx.SaveChanges();
+                }
+                #endregion
             }
         }
 

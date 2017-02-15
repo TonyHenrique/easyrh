@@ -10,7 +10,7 @@ public static class PopulateTalentoConhecimento
     /// Gera Lista de Conhecimentos necessários
     /// </summary>
     /// <param name="talento"></param>
-    public static void Populate(this Talento talento)
+    public static void PopulateConhecimentos(this Talento talento)
     {
         talento.Conhecimento.Add(new Conhecimento() { Talento = talento, Nome = "Ionic", Nota = 0, IsImportante = true });
         talento.Conhecimento.Add(new Conhecimento() { Talento = talento, Nome = "Android", Nota = 0, IsImportante = true });

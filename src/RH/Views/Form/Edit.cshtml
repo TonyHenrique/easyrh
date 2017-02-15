@@ -1,153 +1,108 @@
 ﻿@*@model RH.Model.Talento*@
 @{
-
-// code here @Model.Nome
 }
 
-<div id="div1" ng-app="talentoApp" ng-init="carrega(GetURLParameter());">
-    <h1>Easycomtec</h1>
-    <h2>Formulário de Cadastro de Talento</h2>
+<script src="~/js/talento/app.js"></script>
+<script src="~/js/talento/Edit.js"></script>
 
-    <div ng-controller="formController">
-        Nome:<br />
-        <input type="text" id="NomeTalento" ng-model="talento.nome" size="40" /><br />
-        email:<br />
-        <input type="text" ng-model="talento.email" size="40" /><br />
-        Telefone:<br />
-        <input type="text" ng-model="talento.telefone" size="40" /><br />
-        CPF:<br />
-        <input type="text" ng-model="talento.cpf" size="40" /><br />
-        <fieldset>
-            <legend>Dados Bancários</legend>
-            Banco:<br />
-            <input type="text" ng-model="talento.banco" /><br />
-            Agência:<br />
-            <input type="text" ng-model="talento.agencia" /><br />
-            Número:<br />
-            <input type="text" ng-model="talento.numeroDaConta" /><br />
-            Tipo de Conta:<br />
-            @*<input type="text" ng-model="talento.tipoDeConta" /><br />*@
-            <label><input type="radio" name="tipodeconta" ng-model="talento.tipoDeConta" value="CHAIN"> Chain / Corrente</label><br />
-            <label><input type="radio" name="tipodeconta" ng-model="talento.tipoDeConta" value="SAVINGS"> Savings / Poupança</label><br />
-        </fieldset>
-        <br />
+<body class="disable-selection" onscroll="carregaEstrelas()">
 
-        <fieldset>
-            <legend>
-                Conhecimentos:
-            </legend>
-            <table id="tableConhecimentos">
-                <tbody ng-repeat="conhecimento in talento.conhecimento">
-                    <tr>
-                        <td colspan="2">
-                            <h3>
-                                {{conhecimento.nome}}
-                            </h3>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span style="font-size:smaller">Não conheço <br /> / I don't know</span>
-                        </td>
-                        <td>
-                            <span id="s1" style="font-size: xx-large; cursor:pointer">
-                                <span title="0" onclick="acendeapaga($(this).parent(), this.title);" style="font-size:smaller">&#9988;</span>
-                                <span title="1" onclick="acendeapaga($(this).parent(), this.title);">&star;</span>
-                                <span title="2" onclick="acendeapaga($(this).parent(), this.title);">&star;</span>
-                                <span title="3" onclick="acendeapaga($(this).parent(), this.title);">&star;</span>
-                                <span title="4" onclick="acendeapaga($(this).parent(), this.title);">&star;</span>
-                                <span title="5" onclick="acendeapaga($(this).parent(), this.title);">&star;</span>
+    <div class="container body-content" ng-app="talentoApp">
+        <h1>Easycomtec</h1>
+        <h2>Formulário de Cadastro de Talento</h2>
 
-                                <input type="text" ng-model="conhecimento.nota"
-                                       onchange="acendeapaga($(this).parent(), this.value);"
-                                       style="visibility:collapse;width:0px;height:0px;" />
-                                <input type="button" id="b1" onclick="$(this).prev('input').change();"
-                                       style="visibility:collapse;width:0px;height:0px;" />
-                            </span>
-                        </td>
-                        <td>
-                            <span style="font-size:smaller">Senior</span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <script>
-                function carregaEstrelas() {
-                    //document.title = Date();
-
-                    rows = $('#tableConhecimentos > tbody > tr');
-                    //alert(rows.length);
-                    for (i = 0; i < rows.length; i++) {
-                        b1 = $(rows[i]).find("#b1");
-                        //$(b1).css("background-color", "red");
-                        $(b1).click();
-                    }
-                }
-            </script>
-            <script>
-                function acendeapaga(span, numero) {
-                    //alert(estrela.title);  o numero da estrela selecionada vem do title do span
-                    numero = parseInt(numero);  //  alert(numero + 1 -1);
-                    old = $(span).children().next('input').first().val();
-
-                    if (!isNaN(old) & !isNaN(numero) & old != numero) {
-                        //alert(old + " " + numero);
-                        $(span).children().next('input').first().val(numero).change();
-                    }
-
-                    zero = "&#9988;";
-                    estrelaapagada = "&star;";
-                    estrelaacesa = "&starf;";
-
-
-                    estrelas = $(span).children();
-                    // limpa as estrelas
-                    for (var i = 0; i < estrelas.length; i++) {
-                        $(estrelas[i + 1]).html('&star;');
-                        $(estrelas[i + 1]).css('color', 'dimgray');
-                    }
-
-                    // acende as estrelas ate o numero i
-                    for (var i = 0; i < numero; i++) {
-                        $(estrelas[i + 1]).html('&starf;');
-                        $(estrelas[i + 1]).css('color', 'darkorange');
-                    }
-                }
-            </script>
+        <div ng-controller="editController" ng-init="carrega();">
+            Nome:<br />
+            <input type="text" id="NomeTalento" ng-model="talento.nome" size="40" /><br />
+            email:<br />
+            <input type="text" ng-model="talento.email" size="40" /><br />
+            Telefone:<br />
+            <input type="text" ng-model="talento.telefone" size="40" /><br />
+            CPF:<br />
+            <input type="text" ng-model="talento.cpf" size="40" /><br />
+            <fieldset>
+                <legend>Dados Bancários</legend>
+                Banco:<br />
+                <input type="text" ng-model="talento.banco" /><br />
+                Agência:<br />
+                <input type="text" ng-model="talento.agencia" /><br />
+                Número:<br />
+                <input type="text" ng-model="talento.numeroDaConta" /><br />
+                Tipo de Conta:<br />
+                @*<input type="text" ng-model="talento.tipoDeConta" /><br />*@
+                <label><input type="radio" name="tipodeconta" ng-model="talento.tipoDeConta" value="CHAIN"> Chain / Corrente</label><br />
+                <label><input type="radio" name="tipodeconta" ng-model="talento.tipoDeConta" value="SAVINGS"> Savings / Poupança</label><br />
+            </fieldset>
             <br />
-        </fieldset>
-        <br />
-        Do you know any other language or framework that was not listed above? Tell us and evaluate yourself from 0 to 5. / Conhece mais alguma linguagem ou framework que não foi listado aqui em cima? Conte para nos e se auto avalie ainda de 0 a 5.<br />
-        <input type="text" ng-model="talento.obS_Conhecimentos" />
-        <br />
-        <br />
-        Link para o seu projeto CRUD:<br />
-        <input type="text" ng-model="talento.linkCRUD" />
-        <br />
-        <br />
-        OK, {{talento.nome}}, agora com tudo preenchido, é só enviar as informações!
-        <br />
-        <br />
-        @*<button ng-click="carrega()">carrega</button>*@
-        @*<button ng-click="novo()" class="btn btn-success">Novo</button>*@
-        <button ng-click="salvaemudaurl('/')" class="btn btn-success">Salvar Currículo</button>
-        @*<button ng-click="apaga()" class="btn btn-success">Apagar</button>*@
-        <br />
+
+            <fieldset>
+                <legend>
+                    Conhecimentos:
+                </legend>
+                <table id="tableConhecimentos">
+                    <tbody ng-repeat="conhecimento in talento.conhecimento">
+                        <tr>
+                            <td colspan="2">
+                                <h3>
+                                    {{conhecimento.nome}}
+                                </h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span style="font-size:smaller">Não conheço <br /> / I don't know</span>
+                            </td>
+                            <td>
+                                <span id="s1" style="font-size: xx-large; cursor:pointer">
+                                    <span title="0" onclick="acendeapaga($(this).parent(), this.title);" style="font-size:smaller">&#9988;</span>
+                                    <span title="1" onclick="acendeapaga($(this).parent(), this.title);">&star;</span>
+                                    <span title="2" onclick="acendeapaga($(this).parent(), this.title);">&star;</span>
+                                    <span title="3" onclick="acendeapaga($(this).parent(), this.title);">&star;</span>
+                                    <span title="4" onclick="acendeapaga($(this).parent(), this.title);">&star;</span>
+                                    <span title="5" onclick="acendeapaga($(this).parent(), this.title);">&star;</span>
+
+                                    <input type="text" ng-model="conhecimento.nota"
+                                           onchange="acendeapaga($(this).parent(), this.value);"
+                                           style="visibility:collapse;width:0px;height:0px;" />
+                                    <input type="button" id="b1" onclick="$(this).prev('input').change();"
+                                           style="visibility:collapse;width:0px;height:0px;" />
+                                </span>
+                            </td>
+                            <td>
+                                <span style="font-size:smaller">Senior</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <script>
+
+                </script>
+                <script src="~/js/estrelas.js">
+
+                </script>
+                <br />
+            </fieldset>
+            <br />
+            Do you know any other language or framework that was not listed above? Tell us and evaluate yourself from 0 to 5. / Conhece mais alguma linguagem ou framework que não foi listado aqui em cima? Conte para nos e se auto avalie ainda de 0 a 5.<br />
+            <input type="text" ng-model="talento.obS_Conhecimentos" size="30" />
+            <br />
+            <br />
+            Link para o seu projeto CRUD:<br />
+            <input type="text" ng-model="talento.linkCRUD" size="40" />
+            <br />
+            <br />
+            OK, {{talento.nome}}, agora com tudo preenchido, é só enviar as informações!
+            <br />
+            <br />
+
+            <button ng-click="salvaemudaurl('/')" class="btn btn-success">Salvar Currículo</button>
+
+            <br />
+        </div>
     </div>
-</div>
-@*<input type="button" onclick="carregaEstrelas()" />*@
-<script src="~/js/talento.js"></script>
+</body>
 <script>
 
-    angular.element(div1).ready(function () {
-        // Your function that runs after all DOM is loaded
-
-        window.carrega(GetURLParameter());
-
-        $("#NomeTalento").focus();
-        //carregaEstrelas();
-    });
-
-    //setInterval(carregaEstrelas(), 1000);
+    $("#NomeTalento").focus();
 
 </script>

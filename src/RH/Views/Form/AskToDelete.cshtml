@@ -3,20 +3,18 @@
 *@
 @{
 }
-<h1>Confirma apagar?</h1>
-<div id="div1" ng-app="talentoApp" ng-controller="formController">
-    <h2>{{talento.nome}}</h2>
-    <br />
-    <input type="button" class="btn" value="SIM" onclick="apaga(GetURLParameter(), '/Form/List');" />
-    <input type="button" class="btn" value="NÃO" onclick="window.location='/Form/List'" />
-</div>
 
-<script src="~/js/talento.js"></script>
+<script src="~/js/talento/app.js"></script>
+<script src="~/js/talento/AskToDelete.js"></script>
 
-<script>
-    angular.element(div1).ready(function () {
-        // Your function that runs after all DOM is loaded
-        window.carrega(GetURLParameter());
-    });
+<body class="disable-selection">
+    <div class="container body-content" ng-app="talentoApp" ng-controller="askToDeleteController" ng-init="carrega(GetURLParameter())">
 
-</script>
+        <h1>Confirma apagar?</h1>
+
+        <h2>{{talento.nome}}</h2>
+        <br />
+        <input type="button" class="btn" value="SIM" ng-click="apaga(GetURLParameter(), '/Form/List');" />
+        <input type="button" class="btn" value="NÃO" ng-click="gotourl('/Form/List');" />
+    </div>
+</body>

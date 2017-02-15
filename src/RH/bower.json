@@ -10,7 +10,8 @@
     "fontawesome": "^4.2.0",
     "angular": "^1.6.2",
     "angular-resource": "*",
-    "rateyo": "^2.2.0"
+    "rateyo": "^2.2.0",
+    "jquery-bar-rating": "^1.2.1"
   },
   "resolutions": {
     "jquery": ">= 1.7.2"

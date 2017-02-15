@@ -4,35 +4,34 @@
 @{
 }
 
-<div id="div1" ng-app="talentoApp">
-    <h1>Easycomtec</h1>
-    <h2>Listagem do Cadastro de Talentos</h2>
+<script src="~/js/talento/app.js"></script>
+<script src="~/js/talento/List.js"></script>
 
-    <div ng-controller="formController">
+<body class="disable-selection">
+    <div class="container body-content" ng-app="talentoApp">
+            <h1>Easycomtec</h1>
+            <h2>Listagem do Cadastro de Talentos</h2>
 
-        <h1>Listagem</h1>
+            <div ng-controller="listController" ng-init="carregatodos()">
 
-        <ul ng-repeat="talento in talentos">
-            <li>
-                <a href="/Form/Edit/{{talento.id_Talento}}" class="btn btn-default" onclick="">Editar</a>
-                <a href="/Form/AskToDelete/{{talento.id_Talento}}" class="btn btn-danger">Excluir</a>
-                <b>{{talento.nome}}</b>
-                <b>{{talento.email}}</b>
-                <b>{{talento.telefone}}</b>
-            </li>
-        </ul>
+                <h1>Listagem</h1>
 
-        <a href="/" class="btn">Voltar ao Início</a>
-    </div>
-</div>
+                <ul ng-repeat="talento in talentos">
+                    <li>
+                        <a href="/Form/Edit/{{talento.id_Talento}}" class="btn btn-default" onclick="">Editar</a>
+                        <a href="/Form/AskToDelete/{{talento.id_Talento}}" class="btn btn-danger">Excluir</a>
+                        <b>{{talento.nome}}</b>
+                        <b>{{talento.email}}</b>
+                        <b>{{talento.telefone}}</b>
+                    </li>
+                </ul>
+                <br />
+                <div style="text-align:left">
 
-<script src="~/js/talento.js"></script>
-<script>
+                    <a href="/" class="btn btn-default">Voltar ao Início</a>
+                    @*<a href="/Form/New" class="btn btn-default">Novo</a>*@
 
-    angular.element(div1).ready(function () {
-        // Your function that runs after all DOM is loaded
-
-        window.carregatodos();
-    });
-
-</script>
+                </div>
+            </div>
+        </div>
+</body>

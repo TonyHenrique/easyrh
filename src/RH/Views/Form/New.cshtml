@@ -3,24 +3,19 @@
 *@
 @{
 }
-<h1>Novo</h1>
-<div id="div1" ng-app="talentoApp" ng-controller="formController">
+<body class="disable-selection">
+    <div class="container body-content">
 
-</div>
+        @*<script src="~/js/talento/app.js"></script>
+        <script src="~/js/talento/New.js"></script>*@
 
-<script src="~/js/talento.js"></script>
-
+        <h1>Novo</h1>
+        <div>
+        </div>
+    </div>
+</body>
 <script>
 
-    angular.element(div1).ready(function () {
+    window.location = '/Form/Edit/';
 
-        window.novo()
-        .then(
-            function (data) {
-                //alert(data);
-                window.location = '/Form/Edit/' + data.id_Talento;
-            }
-        );
-
-    });
 </script>
