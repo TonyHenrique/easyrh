@@ -25,7 +25,7 @@
             function (response) {
 
                 window.location = gotourlwhendone;
-                alert("Dados enviados");
+                //alert("Dados enviados");
             });
         } catch (err) { alert("error " + err); }
     }

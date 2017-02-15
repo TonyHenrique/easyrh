@@ -35,5 +35,10 @@ namespace RH.Controllers
             return View();
         }
 
+        public IActionResult Done()
+        {
+            return View();
+        }
+
     }
 }
