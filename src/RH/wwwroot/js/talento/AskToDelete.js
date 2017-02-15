@@ -1,19 +1,23 @@
 ﻿var askToDeleteController = function ($scope, $resource, $http, $window) {
-    
+
     $scope.carrega = function (id) {
-        return $http.get('/api/data/talento/' + id)
-            .then(function (result) {
-                $scope.talento = result.data;
-                return result.data;
-            });
+        try {
+            return $http.get('/api/data/talento/' + id)
+                .then(function (result) {
+                    $scope.talento = result.data;
+                    return result.data;
+                });
+        } catch (err) { alert("error " + err); }
     }
 
     $scope.apaga = function (id_Talento, gotourlwhendone) {
-        return $http.delete('/api/data/talento/' + id_Talento)
-            .then(function (data) {
-                //$scope.talento.id_Talento
-                window.location = gotourlwhendone;
-            });
+        try {
+            return $http.delete('/api/data/talento/' + id_Talento)
+                .then(function (data) {
+                    //$scope.talento.id_Talento
+                    window.location = gotourlwhendone;
+                });
+        } catch (err) { alert("error " + err); }
     };
 
     $scope.gotourl = function (url) {

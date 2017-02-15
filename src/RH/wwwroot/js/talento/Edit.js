@@ -1,27 +1,33 @@
 ﻿var editController = function ($scope, $resource, $http, $window) {
 
     $scope.carrega = function () {
-        id = $scope.GetURLParameter();
-        //if (id == 0)             // novo        //} else {            // edit
-        return $http.get('/api/data/talento/' + id)
-            .then(function (result) {
-                $scope.talento = result.data;
-                return result.data;
-            });
+        try {
+            id = $scope.GetURLParameter();
+            //if (id == 0)             // novo        //} else {            // edit
+            return $http.get('/api/data/talento/' + id)
+                .then(function (result) {
+                    $scope.talento = result.data;
+                    return result.data;
+                });
+        } catch (err) { alert("error " + err); }
     }
 
     $scope.salva = function () {
-        dataService = $resource('/api/data/talento/Update/:id');
-        return dataService.save($scope.talento);
+        try {
+            dataService = $resource('/api/data/talento/Update/:id');
+            return dataService.save($scope.talento);
+        } catch (err) { alert("error " + err); }
     };
 
     $scope.salvaemudaurl = function (gotourlwhendone) {
-        $scope.salva().$promise.then(
-        function (response) {
+        try {
+            $scope.salva().$promise.then(
+            function (response) {
 
-            window.location = gotourlwhendone;
-            alert("Dados enviados");
-        });
+                window.location = gotourlwhendone;
+                alert("Dados enviados");
+            });
+        } catch (err) { alert("error " + err); }
     }
 
     $scope.GetURLParameter = function () {
