@@ -8,31 +8,22 @@
     <link href="/lib/fontawesome/css/font-awesome.css" rel="stylesheet">
 
     <style>
-        .disable-selection {
-            -moz-user-select: none; /* Firefox */
-            -ms-user-select: none; /* Internet Explorer */
-            -khtml-user-select: none; /* KHTML browsers (e.g. Konqueror) */
-            -webkit-user-select: none; /* Chrome, Safari, and Opera */
-            -webkit-touch-callout: none; /* Disable Android and iOS callouts*/
-        }
+     
     </style>
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-
-
+    
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
-
     <script type="text/javascript" src="~/lib/angular/angular.min.js"></script>
     <script type="text/javascript" src="~/lib/angular-resource/angular-resource.min.js"></script>
-
     <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 
     @*<script type="text/javascript" src="~/js/talento.js"></script>*@
 
 </head>
-@RenderBody()
+    @RenderBody()
 
-@RenderSection("scripts", required: false)
-</body>
+    @RenderSection("scripts", required: false)
+
 </html>
